@@ -27,3 +27,4 @@ tokenview_data-*.tar
 
 /.elixir_ls/
 /_build/
+/config/*.secret.exs
