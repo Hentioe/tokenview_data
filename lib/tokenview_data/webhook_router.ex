@@ -5,8 +5,9 @@ defmodule TokenviewData.WebhookRouter do
 
   require Logger
 
-  plug :match
+  alias TokenviewData.Config
 
+  plug :match
   plug :dispatch
 
   post "/webhook" do
@@ -16,7 +17,13 @@ defmodule TokenviewData.WebhookRouter do
 
     data = Jason.decode!(body)
 
-    Logger.info("Parse the data from webhook: #{inspect(data)}")
+    if hook = Config.hook() do
+      Logger.info("Forward the data `#{inspect(data)}` to the hook module `#{hook}`")
+
+      hook.call(data)
+    else
+      Logger.warn("Missing hook module, ignore forwarding")
+    end
 
     send_resp(conn, 200, "OK")
   end

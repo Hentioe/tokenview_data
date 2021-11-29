@@ -21,6 +21,11 @@ defmodule TokenviewData.Config do
     get(:webhook_server_port)
   end
 
+  @spec hook :: module
+  def hook do
+    get(:hook)
+  end
+
   @spec get(atom) :: any
   def get(key) do
     Application.get_env(:tokenview_data, key)
