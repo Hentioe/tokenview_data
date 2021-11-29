@@ -1,9 +1,14 @@
 defmodule TokenviewData.Config do
   @moduledoc false
 
-  @spec key :: String.t()
-  def key() do
-    get(:key)
+  @spec address_track_key :: String.t()
+  def address_track_key() do
+    get(:address_track_key)
+  end
+
+  @spec api_key :: String.t()
+  def api_key() do
+    get(:api_key)
   end
 
   @spec builtin_webhook :: boolean()
