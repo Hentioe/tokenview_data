@@ -5,12 +5,25 @@ defmodule TokenviewData.Application do
 
   use Application
 
+  alias TokenviewData.Config
+
+  require Logger
+
   @impl true
   def start(_type, _args) do
-    children = [
-      # Starts a worker by calling: TokenviewData.Worker.start_link(arg)
-      # {TokenviewData.Worker, arg}
-    ]
+    children = []
+
+    children =
+      if Config.builtin_webhook() do
+        port = Config.webhook_server_port()
+
+        Logger.info("Running TokenviewData.WebhookRouter at 0.0.0.0:#{port} (http)")
+
+        children ++
+          [{Plug.Cowboy, scheme: :http, plug: TokenviewData.WebhookRouter, options: [port: port]}]
+      else
+        children
+      end
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options

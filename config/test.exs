@@ -1,3 +1,4 @@
 import Config
 
-import_config "dev.secret.exs"
+config :tokenview_data,
+  builtin_webhook: false

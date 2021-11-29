@@ -8,7 +8,12 @@ defmodule TokenviewData.Config do
 
   @spec builtin_webhook :: boolean()
   def builtin_webhook() do
-    get(:key)
+    get(:builtin_webhook)
+  end
+
+  @spec webhook_server_port :: integer
+  def webhook_server_port() do
+    get(:webhook_server_port)
   end
 
   @spec get(atom) :: any
