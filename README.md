@@ -1,21 +1,15 @@
 # TokenviewData
 
-**TODO: Add description**
+Tokenview API client.
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `tokenview_data` to your list of dependencies in `mix.exs`:
+Add `tokenview_data` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:tokenview_data, "~> 0.1.0"}
+    {:tokenview_data, git: "https://github.com/Hentioe/tokenview_data_ex.git", tag: "0.1.0-rc.0"}
   ]
 end
 ```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/tokenview_data](https://hexdocs.pm/tokenview_data).
-
