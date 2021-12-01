@@ -15,13 +15,16 @@ defmodule TokenviewData.Application do
 
     children =
       if Config.builtin_webhook() do
-        auto_set_hook_url()
         port = Config.webhook_server_port()
 
         Logger.info("Running TokenviewData.WebhookRouter at 0.0.0.0:#{port} (http)")
 
         children ++
-          [{Plug.Cowboy, scheme: :http, plug: TokenviewData.WebhookRouter, options: [port: port]}]
+          [
+            {Plug.Cowboy,
+             scheme: :http, plug: TokenviewData.WebhookRouter, options: [port: port]},
+            {Task, &auto_set_hook_url/0}
+          ]
       else
         children
       end
@@ -34,6 +37,8 @@ defmodule TokenviewData.Application do
 
   defp auto_set_hook_url do
     if webhook_url = Config.webhook_url() do
+      :timer.sleep(1500)
+
       case TokenviewData.set_webhook_url(webhook_url) do
         {:ok, _} ->
           Logger.info("The webhook URL has been set as #{webhook_url}")
