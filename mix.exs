@@ -1,12 +1,12 @@
 defmodule TokenviewData.MixProject do
   use Mix.Project
 
-  @version "0.1.0-rc.0"
+  @version "0.1.0-rc.1"
 
   def project do
     [
       app: :tokenview_data,
-      version: "0.1.0",
+      version: @version,
       elixir: "~> 1.12",
       start_permanent: Mix.env() == :prod,
       deps: deps()
