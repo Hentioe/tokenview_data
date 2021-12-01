@@ -36,7 +36,7 @@ defmodule TokenviewData.Application do
     if webhook_url = Config.webhook_url() do
       case TokenviewData.set_webhook_url(webhook_url) do
         {:ok, _} ->
-          Logger.info("The webhook URL has been set as `#{webhook_url}`")
+          Logger.info("The webhook URL has been set as #{webhook_url}")
 
         {:error, %TokenviewData.Models.ApiError{} = e} ->
           raise inspect(e)

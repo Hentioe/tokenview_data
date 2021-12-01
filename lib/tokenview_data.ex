@@ -55,7 +55,7 @@ defmodule TokenviewData do
   地址余额。
   """
   def address_balance(coin_abbr, address_hash) do
-    endpoint = "https://services.tokenview.com/vipapi/address/#{coin_abbr}/#{address_hash}/1/1"
+    endpoint = "https://services.tokenview.com/vipapi/addr/b/#{coin_abbr}/#{address_hash}"
 
     Request.call(:api, endpoint, :get)
   end
