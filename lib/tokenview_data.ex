@@ -13,9 +13,9 @@ defmodule TokenviewData do
   end
 
   @doc """
-  查看 Webhook URL。
+  获取 Webhook URL。
   """
-  def review_webhook_url do
+  def get_webhook_url do
     endpoint = "https://services.tokenview.com/vipapi/monitor/getwebhookurl"
 
     Request.call(:address_tracking, endpoint, :get)
@@ -32,9 +32,9 @@ defmodule TokenviewData do
   end
 
   @doc """
-  查看已跟踪的地址列表。
+  获取已跟踪的地址列表。
   """
-  def review_tracked_addresses_list(coin_abbr, page \\ 1) do
+  def get_tracked_addresses_list(coin_abbr, page \\ 1) do
     endpoint =
       "https://services.tokenview.com/vipapi/monitor/address/list/#{coin_abbr}?page=#{page}"
 
