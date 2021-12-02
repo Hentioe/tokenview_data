@@ -55,16 +55,21 @@ defmodule TokenviewData.Request do
           {:ok, Response.t()} | {:error, error}
   defp handle_httpsion_returns({:ok, resp}) do
     status_code = resp.status_code
-    body_json = Jason.decode!(resp.body)
 
-    code = body_json["code"]
-    msg = body_json["msg"]
-    data = body_json["data"]
+    if status_code in [200] do
+      body_json = Jason.decode!(resp.body)
 
-    if code == 1 do
-      {:ok, %Response{status_code: status_code, code: code, msg: msg, data: data}}
+      code = body_json["code"]
+      msg = body_json["msg"]
+      data = body_json["data"]
+
+      if code == 1 do
+        {:ok, %Response{status_code: status_code, code: code, msg: msg, data: data}}
+      else
+        {:error, %ApiError{code: code, msg: msg}}
+      end
     else
-      {:error, %ApiError{code: code, msg: msg}}
+      {:error, %ApiError{code: 401, msg: "HTTP Status: #{status_code}"}}
     end
   end
 
